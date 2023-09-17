@@ -1,0 +1,31 @@
+{
+    "name": "smarttesting/01-01-unit-tests",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Arkadiusz Kondas",
+            "email": "arkadiusz.kondas@gmail.com"
+        }
+    ],
+    "require": {
+        "psr/log": "^3.0",
+        "symfony/http-client": "^6.3",
+        "symfony/uid": "^6.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.3"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "SmartTesting\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SmartTesting\\Tests\\": "tests/"
+        }
+    }
+}

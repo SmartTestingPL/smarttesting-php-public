@@ -1,0 +1,1 @@
+{"version":1,"defects":{"SmartTesting\\Tests\\SmartTestingAppTest::test_should_return_401_within_500_ms_when_calling_fraud_check_with_database_issues":3},"times":{"SmartTesting\\Tests\\SmartTestingAppTest::test_should_return_401_within_500_ms_when_calling_fraud_check_with_database_issues":3.404}}

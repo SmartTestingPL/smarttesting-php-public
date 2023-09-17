@@ -1,0 +1,9 @@
+vendor/
+.phpunit.cache
+.php-cs-fixer.cache
+var/
+node_modules/
+node/
+build/
+coverage/
+infection.log

@@ -1,0 +1,38 @@
+{
+    "name": "smarttesting/smarttesting-php",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Arkadiusz Kondas",
+            "email": "arkadiusz.kondas@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.2",
+        "ext-sockets": "*"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.27"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+        "check-cs": [
+            "php-cs-fixer fix --dry-run --diff"
+        ],
+        "fix-cs": [
+            "php-cs-fixer fix"
+        ],
+        "phpunit": [
+            "cd 01-introduction-to-testing/01-01-unit-tests && vendor/bin/phpunit --colors=always"
+        ],
+        "install-modules": [
+            "cd 01-introduction-to-testing/01-01-unit-tests && composer install"
+        ],
+        "tests": [
+            "@check-cs",
+            "@phpunit"
+        ]
+    }
+}

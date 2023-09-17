@@ -1,0 +1,42 @@
+{
+    "name": "smarttesting/00-bik-service-core",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Arkadiusz Kondas",
+            "email": "arkadiusz.kondas@gmail.com"
+        }
+    ],
+    "require": {
+        "amphp/parallel": "^1.4",
+        "promphp/prometheus_client_php": "^2.4",
+        "psr/log": "^1.1",
+        "symfony/http-client": "^5.1",
+        "symfony/uid": "^5.1"
+    },
+    "require-dev": {
+        "infection/infection": "^0.26.5",
+        "phpunit/phpunit": "^9.3"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "SmartTesting\\Bik\\Score\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SmartTesting\\Bik\\Score\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "tests:mutation": [
+            "infection"
+        ],
+        "tests:unit": [
+            "phpunit"
+        ]
+    }
+}
