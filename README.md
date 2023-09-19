@@ -9,11 +9,28 @@
 
 W celu uruchomienia projektu należy mieć zainstalowane:
 
-* [PHP](https://www.php.net/) (min. `8.0`)
+* [PHP](https://www.php.net/) (min. `8.2`)
 * [Composer](https://getcomposer.org/)
 * [Symfony CLI](https://symfony.com/download)
 * [Docker](https://docs.docker.com/engine/install/)
 * [Docker Compose](https://docs.docker.com/compose/install/)
+
+## Uruchamianie
+
+W celu uruchomienia poszczególnych modułów można skorzystać z następującego polecenia:
+```bash
+docker run -v $(pwd):$(pwd) -w $(pwd) -i -t akondas/smarttesting:php-8.2.11 /bin/bash
+```
+
+Następnie (będą w kontenerze) przejdź do interesującego cię modułu i uruchom testy:
+
+```bash
+cd 01-introduction-to-testing/01-01-unit-tests
+composer install
+vendor/bin/phpunit
+```
+
+Poszczególne moduły mogą zawierać dodatkowe wymagania (jak baza danych). Instrukcja uruchamiania będzie znajdować się w poszczególnych plikach README każdego modułu. 
 
 ## Instalacja
 
