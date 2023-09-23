@@ -25,10 +25,12 @@
             "php-cs-fixer fix"
         ],
         "phpunit": [
-            "cd 01-introduction-to-testing/01-01-unit-tests && vendor/bin/phpunit --colors=always"
+            "cd 01-introduction-to-testing/01-01-unit-tests && vendor/bin/phpunit --colors=always",
+            "cd 02-unit-testing/02-01-unit-tests && vendor/bin/phpunit --colors=always"
         ],
         "install-modules": [
-            "cd 01-introduction-to-testing/01-01-unit-tests && composer install"
+            "cd 01-introduction-to-testing/01-01-unit-tests && composer install",
+            "cd 02-unit-testing/02-01-unit-tests && composer install"
         ],
         "tests": [
             "@check-cs",
