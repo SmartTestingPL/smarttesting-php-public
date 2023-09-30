@@ -1,0 +1,78 @@
+framework:
+  messenger:
+    transports:
+      amqp: "%env(MESSENGER_TRANSPORT_DSN)%"
+    routing:
+      SmartTesting\Verifier\Customer\CustomerVerification: amqp
+
+doctrine:
+  dbal:
+    url: '%env(resolve:DATABASE_URL)%'
+  orm:
+    auto_generate_proxy_classes: true
+    naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+    auto_mapping: true
+    mappings:
+      Customer:
+        type: annotation
+        dir: '%kernel.project_dir%/src/Verifier/Customer'
+        is_bundle: false
+        prefix: SmartTesting\Verifier\Customer
+        alias: Customer
+
+doctrine_migrations:
+  migrations_paths:
+    'SmartTesting\Migrations': 'migrations'
+  storage:
+    table_storage:
+      table_name: 'migration_versions'
+
+services:
+  _defaults:
+    public: true
+
+  fraudListener:
+    class: SmartTesting\Verifier\Customer\MessengerFraudListener
+    arguments:
+      - '@verificationRepository'
+    tags:
+      -
+        name: messenger.message_handler
+        handles: SmartTesting\Verifier\Customer\CustomerVerification
+        method: onFraud
+
+  fraudNotifier:
+    class: SmartTesting\Verifier\Customer\MessengerFraudAlertNotifier
+    arguments:
+      - '@messenger.bus.default'
+
+  verifier:
+    class: SmartTesting\Verifier\Customer\CustomerVerifier
+    arguments:
+      - !tagged_iterator verification
+      - '@verificationRepository'
+      - '@fraudNotifier'
+
+  verificationRepository:
+    class: SmartTesting\Verifier\Customer\DoctrineVerificationRepository
+    public: true
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+
+  ageVerification:
+    class: SmartTesting\Verifier\Customer\Verification\AgeVerification
+    tags: ['verification']
+
+  idVerification:
+    class: SmartTesting\Verifier\Customer\Verification\IdentificationNumberVerification
+    tags: ['verification']
+
+  SmartTesting\Verifier\Customer\FraudController:
+    class: SmartTesting\Verifier\Customer\FraudController
+    arguments:
+      - '@verifier'
+    tags: ['controller.service_arguments']
+
+  SmartTesting\Verifier\Customer\CustomerParamConverter:
+    class: SmartTesting\Verifier\Customer\CustomerParamConverter
+    tags: ['request.param_converter']

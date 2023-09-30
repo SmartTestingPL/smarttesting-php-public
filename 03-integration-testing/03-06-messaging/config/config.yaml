@@ -1,0 +1,43 @@
+framework:
+  messenger:
+    transports:
+      amqp: "%env(MESSENGER_TRANSPORT_DSN)%"
+    routing:
+      SmartTesting\Verifier\Customer\CustomerVerification: amqp
+
+services:
+  _defaults:
+    public: true
+
+  fraudListener:
+    class: SmartTesting\Verifier\Customer\MessengerFraudListener
+    arguments:
+      - '@verificationRepository'
+    tags:
+      -
+        name: messenger.message_handler
+        handles: SmartTesting\Verifier\Customer\CustomerVerification
+        method: onFraud
+
+  fraudNotifier:
+    class: SmartTesting\Verifier\Customer\MessengerFraudAlertNotifier
+    arguments:
+      - '@messenger.bus.default'
+
+  verifier:
+    class: SmartTesting\Verifier\Customer\CustomerVerifier
+    arguments:
+      - !tagged_iterator verification
+      - '@verificationRepository'
+      - '@fraudNotifier'
+
+  verificationRepository:
+    class: SmartTesting\Tests\Verifier\Customer\InMemoryVerificationRepository
+
+  ageVerification:
+    class: SmartTesting\Verifier\Customer\Verification\AgeVerification
+    tags: ['verification']
+
+  idVerification:
+    class: SmartTesting\Verifier\Customer\Verification\IdentificationNumberVerification
+    tags: ['verification']

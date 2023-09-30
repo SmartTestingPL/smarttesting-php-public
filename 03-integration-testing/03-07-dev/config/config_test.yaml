@@ -1,0 +1,10 @@
+framework:
+  test: true
+  session:
+    storage_id: session.storage.mock_file
+
+services:
+
+  verificationRepository:
+    class: SmartTesting\Tests\Verifier\Customer\InMemoryVerificationRepository
+

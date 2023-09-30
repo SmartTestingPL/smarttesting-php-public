@@ -1,0 +1,37 @@
+version: '3.4'
+
+services:
+  broker:
+    restart: always
+    image: rabbitmq:3.7-management-alpine
+    environment:
+      RABBITMQ_DEFAULT_USER: main
+      RABBITMQ_DEFAULT_PASS: main
+    ports: [5672:5672,15672:15672]
+
+  database:
+    restart: always
+    image: postgres:11-alpine
+    logging:
+      driver: none
+    environment:
+      POSTGRES_USER: main
+      POSTGRES_PASSWORD: main
+      POSTGRES_DB: main
+    ports: [5433:5432]
+
+  app:
+    restart: always
+    image: st_app
+    build:
+      context: .
+    command: >
+      bash -c 'bin/console cache:clear &&
+      bin/console d:m:m --no-interaction &&
+      bin/console messenger:setup-transports --no-interaction &&
+      symfony serve --no-tls'
+    ports: [8000:8000]
+    env_file: .env.docker
+    depends_on:
+      - broker
+      - database

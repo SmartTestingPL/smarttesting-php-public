@@ -1,0 +1,22 @@
+services:
+  _defaults:
+    public: true
+
+  ageVerification:
+    class: SmartTesting\Client\AgeVerification
+    tags: ['verification']
+
+  customerVerifier:
+    class: SmartTesting\Client\CustomerVerifier
+    arguments:
+      - !tagged_iterator verification
+
+  SmartTesting\Client\FraudController:
+    class: SmartTesting\Client\FraudController
+    arguments:
+      - '@customerVerifier'
+    tags: ['controller.service_arguments']
+
+  SmartTesting\Client\PersonParamConverter:
+    class: SmartTesting\Client\PersonParamConverter
+    tags: ['request.param_converter']

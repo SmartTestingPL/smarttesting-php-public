@@ -1,0 +1,12 @@
+services:
+  ageVerification:
+    class: SmartTesting\Tests\Client\FakeAgeVerifier
+    tags: ['verification']
+
+  SmartTesting\Tests\Behat\:
+    resource: '../tests/Behat/*'
+
+framework:
+  test: true
+  session:
+    storage_id: session.storage.mock_file

@@ -1,0 +1,27 @@
+doctrine:
+  dbal:
+    url: '%env(resolve:DATABASE_URL)%'
+  orm:
+    auto_generate_proxy_classes: true
+    naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+    auto_mapping: true
+    mappings:
+      Customer:
+        type: annotation
+        dir: '%kernel.project_dir%/src/Verifier/Customer'
+        is_bundle: false
+        prefix: SmartTesting\Verifier\Customer
+        alias: Customer
+
+doctrine_migrations:
+  migrations_paths:
+    'SmartTesting\Migrations': 'migrations'
+  storage:
+    table_storage:
+      table_name: 'migration_versions'
+
+services:
+  SmartTesting\Verifier\Customer\DoctrineVerificationRepository:
+    public: true
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
