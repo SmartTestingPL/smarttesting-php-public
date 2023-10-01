@@ -1,0 +1,32 @@
+{
+    "name": "smarttesting/bonus-livecoding",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Arkadiusz Kondas",
+            "email": "arkadiusz.kondas@gmail.com"
+        }
+    ],
+    "require": {
+        "psr/log": "^1.1",
+        "symfony/http-client": "^6.3",
+        "symfony/uid": "^6.3"
+    },
+    "require-dev": {
+        "beberlei/assert": "^3.2",
+        "phpunit/phpunit": "^10.3"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "SmartTesting\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SmartTesting\\Tests\\": "tests/"
+        }
+    }
+}

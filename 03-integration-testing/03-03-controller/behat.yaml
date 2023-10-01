@@ -1,0 +1,17 @@
+default:
+  suites:
+    default:
+      contexts:
+        - SmartTesting\Tests\Behat\FeatureContext
+        - Behat\MinkExtension\Context\MinkContext
+        - behatch:context:json
+        - behatch:context:rest
+  extensions:
+    FriendsOfBehat\SymfonyExtension:
+      kernel:
+        class: SmartTesting\Kernel
+    Behat\MinkExtension:
+      sessions:
+        symfony:
+          symfony: ~
+    Behatch\Extension: ~

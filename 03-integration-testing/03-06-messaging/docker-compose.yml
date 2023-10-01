@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  broker:
+    restart: always
+    image: rabbitmq:3.7-management-alpine
+    environment:
+      RABBITMQ_DEFAULT_USER: main
+      RABBITMQ_DEFAULT_PASS: main
+    ports: [5672:5672,15672:15672]

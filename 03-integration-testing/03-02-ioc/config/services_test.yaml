@@ -1,0 +1,7 @@
+services:
+  _defaults:
+    public: true
+
+  # na potrzeby testów podmieniamy implementację DatabaseAccessor na taką która posiada bazę danych w pamięci
+  accessor:
+    class: SmartTesting\Tests\Client\InMemoryDatabaseAccessor

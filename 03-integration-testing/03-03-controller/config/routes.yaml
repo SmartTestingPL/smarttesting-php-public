@@ -1,0 +1,3 @@
+controllers:
+  resource: ../src/Client/FraudController.php
+  type: annotation

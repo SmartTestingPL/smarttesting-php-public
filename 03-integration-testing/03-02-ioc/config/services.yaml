@@ -1,0 +1,36 @@
+services:
+  _defaults:
+    public: true
+
+  httpCallMaker:
+    class: SmartTesting\Client\HttpCallMaker
+
+  accessor:
+    class: SmartTesting\Client\DatabaseAccessor
+
+  eventEmitter:
+    class: SmartTesting\Client\EventEmitter
+
+  ageVerification:
+    class: SmartTesting\Client\Verification\AgeVerification
+    arguments:
+      - '@httpCallMaker'
+      - '@accessor'
+    tags: ['verification']
+
+  idVerification:
+    class: SmartTesting\Client\Verification\IdentificationNumberVerification
+    arguments:
+      - '@accessor'
+    tags: ['verification']
+
+  nameVerification:
+    class: SmartTesting\Client\Verification\NameVerification
+    arguments:
+      - '@eventEmitter'
+    tags: ['verification']
+
+  customerVerifier:
+    class: SmartTesting\Client\CustomerVerifier
+    arguments:
+      - !tagged_iterator verification
