@@ -1,0 +1,35 @@
+{
+    "name": "smarttesting/04-02-gui-based-e2e",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Arkadiusz Kondas",
+            "email": "arkadiusz.kondas@gmail.com"
+        }
+    ],
+    "require": {
+        "psr/log": "^1.1",
+        "symfony/http-client": "^5.1",
+        "symfony/uid": "^5.1"
+    },
+    "require-dev": {
+        "dbrekelmans/bdi": "^1.1",
+        "fakerphp/faker": "^1.19",
+        "phpunit/phpunit": "^9.3",
+        "symfony/dom-crawler": "^5.1",
+        "symfony/panther": "^0.7.1"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "SmartTesting\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SmartTesting\\Tests\\": "tests/"
+        }
+    }
+}
