@@ -1,0 +1,54 @@
+{
+    "name": "smarttesting/04-01-rest-based-e2e",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Arkadiusz Kondas",
+            "email": "arkadiusz.kondas@gmail.com"
+        }
+    ],
+    "require": {
+        "psr/log": "^1.1",
+        "symfony/http-client": "^5.1",
+        "symfony/uid": "^5.1"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.19",
+        "phpunit/phpunit": "^9.3",
+        "stechstudio/backoff": "^1.1",
+        "symfony/framework-bundle": "^5.1"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+        "install-all": [
+            "composer install",
+            "cd ../fraud-verifier && composer install",
+            "cd ../loan-orders && composer install"
+        ],
+        "start-services": [
+            "cd ../fraud-verifier && symfony server:start --port=8001 --daemon",
+            "cd ../loan-orders && symfony server:start --port=8002 --daemon"
+        ],
+        "stop-services": [
+            "cd ../fraud-verifier && symfony server:stop || true",
+            "cd ../loan-orders && symfony server:stop || true"
+        ],
+        "test": [
+            "@start-services",
+            "phpunit --colors=always",
+            "@stop-services"
+        ]
+    },
+    "autoload": {
+        "psr-4": {
+            "SmartTesting\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SmartTesting\\Tests\\": "tests/"
+        }
+    }
+}
