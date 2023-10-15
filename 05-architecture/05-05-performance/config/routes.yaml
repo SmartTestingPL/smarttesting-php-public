@@ -1,0 +1,3 @@
+controllers:
+  resource: ../src/Verifier/Customer/FraudController.php
+  type: annotation

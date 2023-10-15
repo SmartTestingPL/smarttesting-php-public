@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  database:
+    restart: always
+    image: postgres:11-alpine
+    logging:
+      driver: none
+    environment:
+      POSTGRES_USER: main
+      POSTGRES_PASSWORD: main
+      POSTGRES_DB: main
+    ports: [5433:5432]
