@@ -1,0 +1,68 @@
+doctrine:
+  dbal:
+    url: '%env(resolve:DATABASE_URL)%'
+  orm:
+    auto_generate_proxy_classes: true
+    naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+    auto_mapping: true
+    mappings:
+      Customer:
+        type: annotation
+        dir: '%kernel.project_dir%/src/Verifier/Customer'
+        is_bundle: false
+        prefix: SmartTesting\Verifier\Customer
+        alias: Customer
+
+doctrine_migrations:
+  migrations_paths:
+    'SmartTesting\Migrations': 'migrations'
+  storage:
+    table_storage:
+      table_name: 'migration_versions'
+
+monolog:
+  handlers:
+    main:
+      type: stream
+      path: "%kernel.logs_dir%/%kernel.environment%.log"
+      level: debug
+      channels: ["!event"]
+    console:
+      type: console
+      process_psr_3_messages: false
+      channels: ["!event", "!doctrine", "!console"]
+
+services:
+  _defaults:
+    public: true
+
+  verifier:
+    class: SmartTesting\Verifier\Customer\CustomerVerifier
+    arguments:
+      - !tagged_iterator verification
+      - '@verificationRepository'
+      - '@monolog.logger'
+
+  verificationRepository:
+    class: SmartTesting\Verifier\Customer\DoctrineVerificationRepository
+    public: true
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+
+  ageVerification:
+    class: SmartTesting\Verifier\Customer\Verification\AgeVerification
+    tags: ['verification']
+
+  idVerification:
+    class: SmartTesting\Verifier\Customer\Verification\IdentificationNumberVerification
+    tags: ['verification']
+
+  SmartTesting\Verifier\Customer\FraudController:
+    class: SmartTesting\Verifier\Customer\FraudController
+    arguments:
+      - '@verifier'
+    tags: ['controller.service_arguments']
+
+  SmartTesting\Verifier\Customer\CustomerParamConverter:
+    class: SmartTesting\Verifier\Customer\CustomerParamConverter
+    tags: ['request.param_converter']

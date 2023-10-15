@@ -1,0 +1,14 @@
+request:
+  method: POST
+  url: /fraudCheck
+  headers:
+    Content-Type: application/json
+  body:
+    uuid: 89c878e3-38f7-4831-af6c-c3b4a0669022
+    name: Fraud
+    surname: Fraudowski
+    dateOfBirth: "2020-01-01"
+    gender: FEMALE
+    nationalIdentificationNumber: 1234567890
+response:
+  status: 401
