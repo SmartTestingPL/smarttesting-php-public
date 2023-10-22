@@ -1,0 +1,44 @@
+{
+    "name": "smarttesting/06-02-tools-bats",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Arkadiusz Kondas",
+            "email": "arkadiusz.kondas@gmail.com"
+        }
+    ],
+    "require": {
+
+    },
+    "require-dev": {
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "SmartTesting\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SmartTesting\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "install-bats": [
+            "tools/build-helper.sh download-bats",
+            "tools/build-helper.sh initialize-submodules"
+        ],
+        "install-zsd": [
+            "tools/build-helper.sh install-zsd"
+        ],
+        "bats": [
+            "build/bats/bin/bats src/test/bats"
+        ],
+        "zsd": [
+            "tools/build-helper.sh generate-zsd"
+        ]
+    }
+}

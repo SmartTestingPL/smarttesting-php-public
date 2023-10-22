@@ -1,0 +1,36 @@
+{
+    "name": "smarttesting/06-03-quality-metrics",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Arkadiusz Kondas",
+            "email": "arkadiusz.kondas@gmail.com"
+        }
+    ],
+    "require": {
+        "psr/log": "^1.1",
+        "symfony/http-client": "^5.1",
+        "symfony/uid": "^5.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.3"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "SmartTesting\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SmartTesting\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "code-coverage": [
+            "phpunit --coverage-html coverage"
+        ]
+    }
+}
