@@ -1,0 +1,3 @@
+#index:
+#    path: /
+#    controller: SmartTesting\Controller\DefaultController::index

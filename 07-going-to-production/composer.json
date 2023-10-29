@@ -1,0 +1,33 @@
+{
+    "name": "smarttesting/07-going-to-production",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Arkadiusz Kondas",
+            "email": "arkadiusz.kondas@gmail.com"
+        }
+    ],
+    "require": {
+
+    },
+    "require-dev": {
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+        "install-all": [
+            "cd fraud-verifier && composer install",
+            "cd loan-orders && composer install"
+        ],
+        "start-services": [
+            "cd fraud-verifier && symfony server:start --no-tls --port=8001 --daemon",
+            "cd loan-orders && symfony server:start --no-tls --port=8002 --daemon"
+        ],
+        "stop-services": [
+            "cd fraud-verifier && symfony server:stop || true",
+            "cd loan-orders && symfony server:stop || true"
+        ]
+    }
+}
