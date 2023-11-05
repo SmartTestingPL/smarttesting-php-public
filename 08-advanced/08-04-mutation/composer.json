@@ -1,0 +1,41 @@
+{
+    "name": "smarttesting/08-04-mutation",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Arkadiusz Kondas",
+            "email": "arkadiusz.kondas@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/uid": "^5.1"
+    },
+    "require-dev": {
+        "infection/infection": "^0.20.2",
+        "phpunit/phpunit": "^9.4"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+        "test": [
+            "phpunit --colors=always"
+        ],
+        "code-coverage": [
+            "phpunit --coverage-html coverage"
+        ],
+        "test-mutation": [
+            "infection"
+        ]
+    },
+    "autoload": {
+        "psr-4": {
+            "SmartTesting\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SmartTesting\\Tests\\": "tests/"
+        }
+    }
+}
