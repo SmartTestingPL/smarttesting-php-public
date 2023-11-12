@@ -1,0 +1,35 @@
+{
+    "name": "smarttesting/09-03-bad-tests",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Arkadiusz Kondas",
+            "email": "arkadiusz.kondas@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/uid": "^5.1"
+    },
+    "require-dev": {
+        "php-mock/php-mock-phpunit": "^2.6",
+        "phpunit/phpunit": "^9.4"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+        "test": [
+            "phpunit --colors=always"
+        ]
+    },
+    "autoload": {
+        "psr-4": {
+            "SmartTesting\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SmartTesting\\Tests\\": "tests/"
+        }
+    }
+}
